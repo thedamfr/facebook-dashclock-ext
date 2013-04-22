@@ -56,21 +56,27 @@ public class ExampleExtension extends DashClockExtension {
                         if (notifications.length() >= 1) {
                             // Publish the extension data update.
                             String title = null;
+                            String link = null;
                             try {
                                 title = ((JSONObject) notifications.get(0)).getString("title");
+                                link = ((JSONObject) notifications.get(0)).getString("link");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 title = "Can't read title";
                             }
                             publishUpdate(new ExtensionData()
                                     .visible(true)
-                                    .icon(R.drawable.ic_extension_example)
+                                    .icon(R.drawable.icon)
                                     .status("New Content")
                                     .expandedTitle(notifications.length() + "  notifications")
                                     .expandedBody(title)
-                                    .clickIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))));
+                                    .clickIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(link))));
 
                         }
+                    } else {
+                        publishUpdate(new ExtensionData()
+                                .visible(false)
+                                .status("No Content"));
                     }
 
                 }

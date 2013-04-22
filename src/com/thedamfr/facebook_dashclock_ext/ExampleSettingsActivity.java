@@ -31,7 +31,7 @@ import android.view.MenuItem;
 public class ExampleSettingsActivity extends PreferenceActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setIcon(R.drawable.ic_extension_example);
+        getActionBar().setIcon(R.drawable.icon);
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
