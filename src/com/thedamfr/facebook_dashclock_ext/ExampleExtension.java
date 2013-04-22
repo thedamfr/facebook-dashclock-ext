@@ -16,6 +16,12 @@
 
 package com.thedamfr.facebook_dashclock_ext;
 
+import android.os.Bundle;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.model.GraphObject;
+import com.facebook.model.GraphObjectList;
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
 
@@ -23,25 +29,56 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ExampleExtension extends DashClockExtension {
     private static final String TAG = "ExampleExtension";
 
     public static final String PREF_NAME = "pref_name";
 
+
     @Override
     protected void onUpdateData(int reason) {
         // Get preference value.
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         String name = sp.getString(PREF_NAME, getString(R.string.pref_name_default));
+        Session fbSession = Session.getActiveSession();
+        if (fbSession.isOpened()) {
+            Request notificationsRequest = Request.newGraphPathRequest(fbSession, "me/notifications", new Request.Callback() {
 
-        // Publish the extension data update.
-        publishUpdate(new ExtensionData()
-                .visible(true)
-                .icon(R.drawable.ic_extension_example)
-                .status("Hello")
-                .expandedTitle("Hello, " + name + "!")
-                .expandedBody("Thanks for checking out this example extension for DashClock.")
-                .clickIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))));
+                @Override
+                public void onCompleted(Response response) {
+                    GraphObject object = response.getGraphObject();
+                    if (object != null) {
+                        JSONArray notifications = (JSONArray) object.getProperty("data");
+                        if (notifications.length() >= 1) {
+                            // Publish the extension data update.
+                            String title = null;
+                            try {
+                                title = ((JSONObject) notifications.get(0)).getString("title");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                title = "Can't read title";
+                            }
+                            publishUpdate(new ExtensionData()
+                                    .visible(true)
+                                    .icon(R.drawable.ic_extension_example)
+                                    .status("New Content")
+                                    .expandedTitle(notifications.length() + "  notifications")
+                                    .expandedBody(title)
+                                    .clickIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))));
+
+                        }
+                    }
+
+                }
+            });
+
+            notificationsRequest.executeAsync();
+        }
+
+
     }
 }
