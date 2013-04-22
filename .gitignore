@@ -13,5 +13,8 @@ local.properties
 .project
 
 # Idea files
-.iml
+*.iml
 .idea/
+
+# Facebook properties
+assets/facebook.properties
