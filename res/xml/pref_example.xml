@@ -22,4 +22,6 @@
             android:summary="You need to connect your facebook to the extension">
         <intent android:action=".LoginActivity"/>
     </PreferenceScreen>
+    <Preference android:title="Feedback"
+                android:summary="For feedback, just tweet @thedamfr"/>
 </PreferenceScreen>
