@@ -72,6 +72,10 @@ public class ExampleExtension extends DashClockExtension {
                                     .expandedBody(title)
                                     .clickIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(link))));
 
+                        } else {
+                            publishUpdate(new ExtensionData()
+                                    .visible(false)
+                                    .status("No Content"));
                         }
                     } else {
                         publishUpdate(new ExtensionData()
