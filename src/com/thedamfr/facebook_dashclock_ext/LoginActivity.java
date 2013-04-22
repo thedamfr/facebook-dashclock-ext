@@ -24,6 +24,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 
+import com.bugsense.trace.BugSenseHandler;
+
 public class LoginActivity extends Activity {
     private static final int SPLASH = 0;
     private static final int SELECTION = 1;
@@ -46,6 +48,20 @@ public class LoginActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Resources resources = this.getResources();
+        AssetManager assetManager = resources.getAssets();
+        Properties properties = new Properties();
+        // Read from the /assets directory
+        try {
+            InputStream inputStream = assetManager.open("bugsense.properties");
+            properties.load(inputStream);
+            System.out.println("The properties are now loaded");
+            //System.out.println("properties: " + properties);
+        } catch (IOException e) {
+            System.err.println("Failed to open bugsense property file");
+            e.printStackTrace();
+        }
+        BugSenseHandler.initAndStartSession(this, properties.getProperty("key"));
         setContentView(R.layout.login_a);
         // Add code to print out the key hash
         try {
@@ -63,9 +79,7 @@ public class LoginActivity extends Activity {
 
         }
 
-        Resources resources = this.getResources();
-        AssetManager assetManager = resources.getAssets();
-        Properties properties = new Properties();
+        properties = new Properties();
         // Read from the /assets directory
         try {
             InputStream inputStream = assetManager.open("facebook.properties");
