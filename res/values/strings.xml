@@ -15,10 +15,11 @@
   -->
 
 <resources>
-    <string name="app_name">Example Extension for DashClock</string>
-    <string name="extension_title">Example extension</string>
-    <string name="extension_description">Displays a nice, friendly hello message.</string>
-    <string name="pref_name_title">Your name</string>
-    <string name="pref_name_default">John Smith</string>
-    <string name="title_settings">Example Extension Settings</string>
+    <string name="app_name">Facebook Extension For DashClock</string>
+    <string name="extension_title">Facebook Extension</string>
+    <string name="extension_description">Use to display Facebook notification in DashClock</string>
+    <string name="pref_name_title">TheDamFr</string>
+    <string name="pref_name_default">Damien Cavaillès</string>
+    <string name="title_settings">Facebook Extension Settings</string>
+    <string name="get_started">To get started, log in using Facebook</string>
 </resources>

@@ -16,7 +16,6 @@
 
 package com.thedamfr.facebook_dashclock_ext;
 
-import com.example.dashclock.exampleextension.R;
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
 
