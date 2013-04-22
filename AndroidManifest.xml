@@ -15,7 +15,10 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.thedamfr.facebook_dashclock_ext">
+    package="com.thedamfr.facebook_dashclock_ext"
+        android:versionCode="1"
+        android:versionName="0.0.0.0.1">
+
 
     <uses-sdk android:minSdkVersion="17" android:targetSdkVersion="17" />
 
@@ -44,12 +47,13 @@
             android:exported="true" />
         <activity android:name=".LoginActivity" android:label="Facebook DashClock Extension">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name=".LoginActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <activity android:name="com.facebook.LoginActivity">
+
 
         </activity>
 

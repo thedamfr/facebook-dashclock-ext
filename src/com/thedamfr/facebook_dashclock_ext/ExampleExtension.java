@@ -16,6 +16,8 @@
 
 package com.thedamfr.facebook_dashclock_ext;
 
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import com.facebook.Request;
 import com.facebook.Response;
@@ -33,6 +35,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class ExampleExtension extends DashClockExtension {
     private static final String TAG = "ExampleExtension";
 
@@ -45,6 +51,25 @@ public class ExampleExtension extends DashClockExtension {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         String name = sp.getString(PREF_NAME, getString(R.string.pref_name_default));
         Session fbSession = Session.getActiveSession();
+        if (fbSession == null) {
+            Resources resources = this.getResources();
+            AssetManager assetManager = resources.getAssets();
+            Properties properties = new Properties();
+            // Read from the /assets directory
+            try {
+                InputStream inputStream = assetManager.open("facebook.properties");
+                properties.load(inputStream);
+                System.out.println("The properties are now loaded");
+                //System.out.println("properties: " + properties);
+            } catch (IOException e) {
+                System.err.println("Failed to open facebook property file");
+                e.printStackTrace();
+            }
+
+            Session session = new Session.Builder(this).setApplicationId(properties.getProperty("app_id", "")).build();
+            Session.setActiveSession(session);
+            fbSession = session;
+        }
         if (fbSession.isOpened()) {
             Request notificationsRequest = Request.newGraphPathRequest(fbSession, "me/notifications", new Request.Callback() {
 
