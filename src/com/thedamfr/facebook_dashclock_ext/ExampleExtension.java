@@ -16,6 +16,7 @@
 
 package com.thedamfr.facebook_dashclock_ext;
 
+import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -47,9 +48,6 @@ public class ExampleExtension extends DashClockExtension {
 
     @Override
     protected void onUpdateData(int reason) {
-        // Get preference value.
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String name = sp.getString(PREF_NAME, getString(R.string.pref_name_default));
         Session fbSession = Session.getActiveSession();
         if (fbSession == null) {
             Resources resources = this.getResources();
@@ -69,6 +67,11 @@ public class ExampleExtension extends DashClockExtension {
             Session session = new Session.Builder(this).setApplicationId(properties.getProperty("app_id", "")).build();
             Session.setActiveSession(session);
             fbSession = session;
+        }
+        if(fbSession != null && !fbSession.isOpened())   {
+            Intent intent = new Intent(this, RefreshSessionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
         if (fbSession.isOpened()) {
             Request notificationsRequest = Request.newGraphPathRequest(fbSession, "me/notifications", new Request.Callback() {

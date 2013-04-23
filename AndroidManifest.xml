@@ -15,40 +15,52 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.thedamfr.facebook_dashclock_ext"
-        android:versionCode="1"
-        android:versionName="0.0.0.0.1">
+          package="com.thedamfr.facebook_dashclock_ext"
+          android:versionCode="1"
+          android:versionName="0.0.0.0.1">
 
 
-    <uses-sdk android:minSdkVersion="17" android:targetSdkVersion="17" />
+    <uses-sdk
+            android:minSdkVersion="17"
+            android:targetSdkVersion="17"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <application android:label="@string/app_name"
-        android:icon="@drawable/icon"
-        android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
-
-        <service android:name="com.thedamfr.facebook_dashclock_ext.ExampleExtension"
+    <application
+            android:label="@string/app_name"
             android:icon="@drawable/icon"
-            android:label="@string/extension_title"
-            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+
+        <service
+                android:name="com.thedamfr.facebook_dashclock_ext.ExampleExtension"
+                android:icon="@drawable/icon"
+                android:label="@string/extension_title"
+                android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
             <intent-filter>
-                <action android:name="com.google.android.apps.dashclock.Extension" />
+                <action android:name="com.google.android.apps.dashclock.Extension"/>
             </intent-filter>
-            <meta-data android:name="protocolVersion" android:value="1" />
-            <meta-data android:name="description"
-                android:value="@string/extension_description" />
-            <meta-data android:name="settingsActivity"
-                android:value=".ExampleSettingsActivity" />
+
+            <meta-data
+                    android:name="protocolVersion"
+                    android:value="1"/>
+            <meta-data
+                    android:name="description"
+                    android:value="@string/extension_description"/>
+            <meta-data
+                    android:name="settingsActivity"
+                    android:value=".ExampleSettingsActivity"/>
         </service>
 
-        <activity android:name="com.thedamfr.facebook_dashclock_ext.ExampleSettingsActivity"
-            android:label="@string/title_settings"
-            android:exported="true" />
-        <activity android:name=".LoginActivity" android:label="Facebook DashClock Extension">
+        <activity
+                android:name="com.thedamfr.facebook_dashclock_ext.ExampleSettingsActivity"
+                android:label="@string/title_settings"
+                android:exported="true"/>
+        <activity
+                android:name=".LoginActivity"
+                android:label="Facebook DashClock Extension">
             <intent-filter>
-                <action android:name=".LoginActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name=".LoginActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
@@ -56,6 +68,9 @@
 
 
         </activity>
+        <activity
+                android:name=".RefreshSessionActivity"
+                android:theme="@style/Theme.Transparent"/>
 
     </application>
 </manifest>
