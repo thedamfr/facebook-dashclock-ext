@@ -27,8 +27,10 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import com.facebook.Session;
+import com.facebook.SessionState;
 
-public class ExampleSettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends PreferenceActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setIcon(R.drawable.icon);
@@ -63,6 +65,23 @@ public class ExampleSettingsActivity extends PreferenceActivity {
         // Bind the summaries of EditText/List/Dialog/Ringtone preferences to
         // their values. When their values change, their summaries are updated
         // to reflect the new value, per the Android Design guidelines.
+        // bindPreferenceSummaryToValue(findPreference(ExampleExtension.PREF_LOGGED_IN));
+
+
+    }
+
+    private void setFacebookStatusScreen() {
+
+        Preference preference = findPreference(ExampleExtension.PREF_LOGGED_IN);
+        if(Session.getActiveSession().isOpened()) {
+            preference.setTitle("You are logged in");
+        }
+        else if (Session.getActiveSession().getState() == SessionState.CREATED_TOKEN_LOADED) {
+            preference.setTitle("Session is cached");
+        }
+        else {
+            preference.setTitle("You need to login !");
+        }
 
     }
 
@@ -118,6 +137,7 @@ public class ExampleSettingsActivity extends PreferenceActivity {
             return true;
         }
     };
+
 
     /**
      * Binds a preference's summary to its value. More specifically, when the preference's value is

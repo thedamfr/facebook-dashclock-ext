@@ -43,7 +43,7 @@ import java.util.Properties;
 public class ExampleExtension extends DashClockExtension {
     private static final String TAG = "ExampleExtension";
 
-    public static final String PREF_NAME = "pref_name";
+    public static final String PREF_LOGGED_IN = "loggedIn";
 
 
     @Override

@@ -19,7 +19,8 @@
 
     <PreferenceScreen
             android:title="Login to Facebook"
-            android:summary="You need to connect your facebook to the extension">
+            android:summary="You need to connect your facebook to the extension"
+            android:key="loggedIn">
         <intent android:action=".LoginActivity"/>
     </PreferenceScreen>
     <Preference android:title="Feedback"
