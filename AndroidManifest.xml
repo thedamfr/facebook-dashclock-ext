@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.thedamfr.facebook_dashclock_ext"
-          android:versionCode="1"
-          android:versionName="0.0.0.0.1">
+          android:versionCode="2"
+          android:versionName="0.0.0.0.2">
 
 
     <uses-sdk
@@ -48,11 +48,11 @@
                     android:value="@string/extension_description"/>
             <meta-data
                     android:name="settingsActivity"
-                    android:value=".ExampleSettingsActivity"/>
+                    android:value=".SettingsActivity"/>
         </service>
 
         <activity
-                android:name="com.thedamfr.facebook_dashclock_ext.ExampleSettingsActivity"
+                android:name="com.thedamfr.facebook_dashclock_ext.SettingsActivity"
                 android:label="@string/title_settings"
                 android:exported="true"/>
         <activity
